@@ -1,4 +1,6 @@
-rootProject.name = 'spring-boot-embryo'
+rootProject.name = 'naked-blog'
 
 include 'application'
 include 'integration-test'
+include 'web'
+

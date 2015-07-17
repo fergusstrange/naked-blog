@@ -1,6 +1,8 @@
-package com.nakedgardener;
+package com.nakedgardener.web.blogpost;
 
 import com.nakedgardener.application.blogpost.BlogPostService;
+import com.nakedgardener.application.domain.BlogPost;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +17,18 @@ public class BlogPostController {
 
     private final BlogPostService blogPostService;
 
+    @Autowired
+    public BlogPostController(BlogPostService blogPostService) {
+        this.blogPostService = blogPostService;
+    }
+
     @RequestMapping(method = GET, value = "/blog-post/{blogPostSlug}", produces = APPLICATION_JSON_VALUE)
     public BlogPost retrieveBlogPost(@PathVariable final String blogPostSlug) {
-        return blogPostRepository.findByBlogPostSlug(blogPostSlug);
+        return blogPostService.findByBlogPostSlug(blogPostSlug);
     }
 
     @RequestMapping(method = PUT, value = "/blog-post", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public BlogPost saveBlogPost(@RequestBody BlogPost blogPost) {
-        return blogPostRepository.save(blogPost);
+        return blogPostService.save(blogPost);
     }
 }

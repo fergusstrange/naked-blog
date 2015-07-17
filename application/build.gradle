@@ -1,30 +1,15 @@
-apply plugin: 'spring-boot'
-
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter:1.2.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-actuator:1.2.4.RELEASE'
     compile 'org.springframework:spring-context-support:4.1.6.RELEASE'
-    compile 'org.springframework.boot:spring-boot-starter-security:1.2.4.RELEASE'
 
-    compile 'com.github.jknack:handlebars-springmvc:2.2.2'
-    compile 'com.github.jknack:handlebars:2.2.2'
+    compile 'org.springframework.data:spring-data-mongodb:1.7.1.RELEASE'
+    compile 'org.mongodb:mongo-java-driver:3.0.2'
+
+    compile 'org.apache.commons:commons-lang3:3.4'
 
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile 'org.mockito:mockito-all:1.10.19'
-}
-
-jar {
-    baseName = 'spring-boot-embryo'
-    version = null
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
-    }
 }

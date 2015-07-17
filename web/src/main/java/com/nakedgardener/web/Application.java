@@ -1,4 +1,4 @@
-package com.nakedgardener;
+package com.nakedgardener.web;
 
 import org.springframework.boot.actuate.system.ApplicationPidFileWriter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
