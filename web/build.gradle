@@ -1,0 +1,19 @@
+apply plugin: 'spring-boot'
+
+dependencies {
+    compile project(':application')
+}
+
+jar {
+    baseName = 'naked-blog'
+    version = null
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.4.RELEASE")
+    }
+}
