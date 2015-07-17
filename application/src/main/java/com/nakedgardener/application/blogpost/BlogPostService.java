@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class BlogPostService {
 
-    private final BlogPostDAO blogPostRepository;
+    private final BlogPostRepository blogPostRepository;
 
     @Autowired
-    public BlogPostService(BlogPostDAO blogPostRepository) {
+    public BlogPostService(BlogPostRepository blogPostRepository) {
         this.blogPostRepository = blogPostRepository;
     }
 

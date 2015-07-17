@@ -1,17 +1,7 @@
-apply plugin: 'mongo'
-
 dependencies {
     compile project(':application')
 
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath('com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.8.0')
-    }
+    testCompile 'junit:junit:4.11'
+    testCompile 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:1.48.0'
 }

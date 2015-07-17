@@ -1,6 +1,7 @@
 package com.nakedgardener.application.blogpost;
 
 import com.nakedgardener.application.configuration.IntegrationTestConfiguration;
+import com.nakedgardener.application.configuration.MongoIntegrationTest;
 import com.nakedgardener.application.domain.BlogPost;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,19 +14,20 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = IntegrationTestConfiguration.class)
-public class BlogPostServiceIntegrationTest {
+@MongoIntegrationTest
+public class BlogPostRepositoryTest {
 
     @Autowired
-    private BlogPostService blogPostService;
+    private BlogPostRepository blogPostRepository;
 
     @Test
     public void shouldRetrieveBlogPostBySlug() throws Exception {
         BlogPost entity = blogPost();
-        blogPostService.save(entity);
+        blogPostRepository.save(entity);
 
-        BlogPost byBlogPostSlug = blogPostService.findByBlogPostSlug("slug-of-post");
+        BlogPost blogPostSlug = blogPostRepository.findByBlogPostSlug("slug-of-post");
 
-        assertEquals(entity, byBlogPostSlug);
+        assertEquals(entity, blogPostSlug);
     }
 
     private BlogPost blogPost() {

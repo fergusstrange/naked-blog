@@ -1,6 +1,7 @@
 package com.nakedgardener.application.configuration;
 
 import com.mongodb.MongoClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,6 +12,12 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "com.nakedgardener")
 public class MongoDBConfiguration {
 
+    @Value("${mongo.host:localhost}")
+    private String mongoHost;
+
+    @Value("${mongo.host.port:27017}")
+    private int mongoHostPort;
+
     @Bean
     public MongoTemplate mongoTemplate() {
         return new MongoTemplate(mongoDbFactory());
@@ -18,6 +25,6 @@ public class MongoDBConfiguration {
 
     @Bean
     public SimpleMongoDbFactory mongoDbFactory() {
-        return new SimpleMongoDbFactory(new MongoClient(), "naked-blog");
+        return new SimpleMongoDbFactory(new MongoClient(mongoHost, mongoHostPort), "naked-blog");
     }
 }
