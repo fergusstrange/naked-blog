@@ -33,7 +33,7 @@ public class RecentBlogPostService {
 
     public ResponseEntity<BlogPosts> recentBlogPosts(int page, int pageSize) {
         try {
-            Pageable pageable = new PageRequest(page, pageSize, DESC);
+            Pageable pageable = new PageRequest(page, pageSize, DESC, "postDate");
             List<BlogPost> blogPosts = blogPostRepository.findByPostDateBefore(now(), pageable);
             return ok(blogPostsBuilder()
                     .blogPosts(blogPosts)
