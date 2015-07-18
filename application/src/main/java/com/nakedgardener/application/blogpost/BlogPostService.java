@@ -1,6 +1,7 @@
 package com.nakedgardener.application.blogpost;
 
 import com.nakedgardener.application.domain.BlogPost;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -13,10 +14,12 @@ import static org.springframework.http.HttpStatus.OK;
 public class BlogPostService {
 
     private final BlogPostRepository blogPostRepository;
+    private final Logger logger;
 
     @Autowired
-    public BlogPostService(BlogPostRepository blogPostRepository) {
+    public BlogPostService(BlogPostRepository blogPostRepository, Logger logger) {
         this.blogPostRepository = blogPostRepository;
+        this.logger = logger;
     }
 
     public ResponseEntity<BlogPost> findByBlogPostSlug(String blogPostSlug) {
@@ -27,6 +30,7 @@ public class BlogPostService {
                     new ResponseEntity<>(NOT_FOUND);
         }
         catch (Exception e) {
+            logger.error("Exception has been thrown by BlogPostService", e);
             return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
         }
     }
