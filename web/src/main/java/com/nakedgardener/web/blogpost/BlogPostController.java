@@ -3,6 +3,7 @@ package com.nakedgardener.web.blogpost;
 import com.nakedgardener.application.blogpost.BlogPostService;
 import com.nakedgardener.application.domain.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,7 @@ public class BlogPostController {
     }
 
     @RequestMapping(method = GET, value = "/blog-post/{blogPostSlug}", produces = APPLICATION_JSON_VALUE)
-    public BlogPost retrieveBlogPost(@PathVariable final String blogPostSlug) {
+    public ResponseEntity<BlogPost> retrieveBlogPost(@PathVariable final String blogPostSlug) {
         return blogPostService.findByBlogPostSlug(blogPostSlug);
     }
 
