@@ -4,13 +4,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class BlogPost {
 
     @Id
     private String id;
-    private Date postDate;
+    private LocalDateTime postDate;
     private String blogPostSlug;
     private String title;
     private String post;
@@ -18,7 +18,7 @@ public class BlogPost {
     public BlogPost() {
     }
 
-    public BlogPost(String id, Date postDate, String blogPostSlug, String title, String post) {
+    public BlogPost(String id, LocalDateTime postDate, String blogPostSlug, String title, String post) {
         this.id = id;
         this.postDate = postDate;
         this.blogPostSlug = blogPostSlug;
@@ -30,7 +30,7 @@ public class BlogPost {
         return id;
     }
 
-    public Date getPostDate() {
+    public LocalDateTime getPostDate() {
         return postDate;
     }
 
@@ -72,5 +72,16 @@ public class BlogPost {
                 .append(title)
                 .append(post)
                 .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "BlogPost{" +
+                "id='" + id + '\'' +
+                ", postDate=" + postDate +
+                ", blogPostSlug='" + blogPostSlug + '\'' +
+                ", title='" + title + '\'' +
+                ", post='" + post + '\'' +
+                '}';
     }
 }
