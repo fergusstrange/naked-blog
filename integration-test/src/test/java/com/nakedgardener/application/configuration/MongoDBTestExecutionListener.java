@@ -20,8 +20,13 @@ public class MongoDBTestExecutionListener extends AbstractTestExecutionListener 
         if(mongodProcess == null) {
             mongodProcess = getDefaultInstance().prepare(new MongodConfigBuilder()
                     .version(PRODUCTION)
-                    .net(new Net(27017, localhostIsIPv6()))
+                    .net(new Net(mongoPort(), localhostIsIPv6()))
                     .build()).start();
         }
+    }
+
+    private int mongoPort() {
+        String mongoPort = System.getProperty("mongo.host.port", "27018");
+        return Integer.valueOf(mongoPort);
     }
 }

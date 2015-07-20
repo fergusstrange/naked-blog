@@ -1,5 +1,6 @@
 package com.nakedgardener.application.configuration;
 
+import org.springframework.boot.test.IntegrationTestPropertiesListener;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
@@ -10,6 +11,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @TestExecutionListeners(listeners = {
+    IntegrationTestPropertiesListener.class,
     MongoDBTestExecutionListener.class,
     DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class

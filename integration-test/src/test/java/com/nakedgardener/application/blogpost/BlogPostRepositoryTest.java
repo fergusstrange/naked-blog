@@ -54,7 +54,7 @@ public class BlogPostRepositoryTest {
                 .postDate(now().plusDays(10))
                 .build();
 
-        List<BlogPost> posts = blogPosts(4);
+        List<BlogPost> posts = blogPosts(1);
         posts.add(inTheFuture);
 
         blogPostRepository.save(posts);

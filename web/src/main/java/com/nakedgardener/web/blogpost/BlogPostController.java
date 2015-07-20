@@ -28,7 +28,8 @@ public class BlogPostController {
         return blogPostService.findByBlogPostSlug(blogPostSlug);
     }
 
-    @RequestMapping(method = PUT, value = "/blog-post", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = PUT, value = "/blog-post",
+            consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public BlogPost saveBlogPost(@RequestBody BlogPost blogPost) {
         return blogPostService.save(blogPost);
     }
