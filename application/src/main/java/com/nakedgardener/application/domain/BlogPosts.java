@@ -27,7 +27,7 @@ public class BlogPosts {
 
         public List<BlogPost> blogPosts = new ArrayList<>();
 
-        public BlogPostsBuilder blogPosts(List<BlogPost> blogPostΩ) {
+        public BlogPostsBuilder blogPosts(List<BlogPost> blogPosts) {
             this.blogPosts.addAll(blogPosts);
             return this;
         }
