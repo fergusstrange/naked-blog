@@ -23,7 +23,7 @@ public class BlogPostController {
         this.blogPostService = blogPostService;
     }
 
-    @RequestMapping(method = GET, value = "/blog-post/_blogPostSlug/${blogPostSlug}", produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = GET, value = "/blog-post/_blogPostSlug/{blogPostSlug}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<BlogPost> retrieveBlogPost(@PathVariable final String blogPostSlug) {
         return blogPostService.findByBlogPostSlug(blogPostSlug);
     }
