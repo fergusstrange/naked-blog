@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.nakedgardener.application.domain.BlogPosts.*;
 import static com.nakedgardener.application.domain.BlogPosts.blogPostsBuilder;
+import static com.nakedgardener.application.domain.BlogPosts.emptyBlogPosts;
 import static java.time.LocalDateTime.now;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;

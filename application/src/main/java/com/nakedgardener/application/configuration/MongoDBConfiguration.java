@@ -1,13 +1,12 @@
 package com.nakedgardener.application.configuration;
 
+import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import com.nakedgardener.application.configuration.converters.LocalDateTimeToDateConverter;
 import com.nakedgardener.application.configuration.converters.DateToLocalDateTimeConverter;
+import com.nakedgardener.application.configuration.converters.LocalDateTimeToDateConverter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
@@ -15,7 +14,7 @@ import static java.util.Arrays.asList;
 
 @Configuration
 @EnableMongoRepositories(basePackages = "com.nakedgardener")
-public class MongoDBConfiguration {
+public class MongoDBConfiguration extends AbstractMongoConfiguration {
 
     @Value("${mongo.host:localhost}")
     private String mongoHost;
@@ -26,17 +25,17 @@ public class MongoDBConfiguration {
     @Value("${mongo.databse.name:naked-blog}")
     private String mongoDatabaseName;
 
-    @Bean
-    public MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoDbFactory());
+    @Override
+    protected String getDatabaseName() {
+        return mongoDatabaseName;
     }
 
-    @Bean
-    public SimpleMongoDbFactory mongoDbFactory() {
-        return new SimpleMongoDbFactory(new MongoClient(mongoHost, mongoHostPort), mongoDatabaseName);
+    @Override
+    public Mongo mongo() throws Exception {
+        return new MongoClient(mongoHost, mongoHostPort);
     }
 
-    @Bean
+    @Override
     public CustomConversions customConversions() {
         return new CustomConversions(asList(
                 new LocalDateTimeToDateConverter(),

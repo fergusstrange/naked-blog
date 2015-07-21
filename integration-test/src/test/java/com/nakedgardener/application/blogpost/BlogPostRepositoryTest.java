@@ -12,9 +12,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.nakedgardener.application.domain.BlogPostBuilder.blogPostBuilder;
 import static java.time.LocalDateTime.now;
+import static java.time.LocalDateTime.of;
+import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.data.domain.Sort.Direction.DESC;
@@ -39,7 +42,7 @@ public class BlogPostRepositoryTest {
 
     @Test
     public void shouldRetrieveBlogPostsBeforeNow() throws Exception {
-        List<BlogPost> blogPosts = blogPosts(10);
+        List<BlogPost> blogPosts = blogPosts(5);
         blogPostRepository.save(blogPosts);
 
         List<BlogPost> retrievedBlogPosts = blogPostRepository.findByPostDateBefore(now(), new PageRequest(0, 5, DESC, "postDate"));
@@ -62,6 +65,27 @@ public class BlogPostRepositoryTest {
         List<BlogPost> blogPosts = blogPostRepository.findByPostDateBefore(now(), new PageRequest(0, 5, DESC, "postDate"));
 
         assertThat(inTheFuture).isNotIn(blogPosts);
+    }
+
+    @Test
+    public void shouldRetrieveRecentBlogPostsOrderedNewestToOldest() throws Exception {
+        blogPostRepository.save(asList(
+                blogPostBuilder().postDate(of(2014, 1, 1, 0, 0)).build(),
+                blogPostBuilder().postDate(of(2014, 1, 2, 0, 0)).build(),
+                blogPostBuilder().postDate(of(2014, 1, 7, 0, 0)).build(),
+                blogPostBuilder().postDate(of(2014, 1, 5, 0, 0)).build(),
+                blogPostBuilder().postDate(of(2014, 1, 4, 0, 0)).build()
+        ));
+
+        List<BlogPost> blogPosts = blogPostRepository.findByPostDateBefore(now(), new PageRequest(0, 5, DESC, "postDate"));
+
+        assertThat(blogPosts.stream().map(BlogPost::getPostDate).collect(Collectors.toList())).containsSequence(
+                of(2014, 1, 7, 0, 0),
+                of(2014, 1, 5, 0, 0),
+                of(2014, 1, 4, 0, 0),
+                of(2014, 1, 2, 0, 0),
+                of(2014, 1, 1, 0, 0)
+        );
     }
 
     private List<BlogPost> blogPosts(double numPosts) {
