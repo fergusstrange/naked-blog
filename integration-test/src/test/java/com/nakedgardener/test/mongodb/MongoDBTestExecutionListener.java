@@ -1,4 +1,4 @@
-package com.nakedgardener.application.configuration;
+package com.nakedgardener.test.mongodb;
 
 import de.flapdoodle.embed.mongo.MongodProcess;
 import de.flapdoodle.embed.mongo.config.MongodConfigBuilder;
@@ -23,6 +23,12 @@ public class MongoDBTestExecutionListener extends AbstractTestExecutionListener 
                     .net(new Net(mongoPort(), localhostIsIPv6()))
                     .build()).start();
         }
+    }
+
+    @Override
+    public void afterTestMethod(TestContext testContext) throws Exception {
+        MongoDBTestCleaner mongoDBTestCleaner = testContext.getApplicationContext().getBean(MongoDBTestCleaner.class);
+        mongoDBTestCleaner.cleanUpSavedEntities();
     }
 
     private int mongoPort() {
