@@ -2,6 +2,8 @@ package com.nakedgardener.application.configuration;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
 import com.nakedgardener.application.configuration.converters.DateToLocalDateTimeConverter;
 import com.nakedgardener.application.configuration.converters.LocalDateTimeToDateConverter;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +34,7 @@ public class MongoDBConfiguration extends AbstractMongoConfiguration {
 
     @Override
     public Mongo mongo() throws Exception {
-        return new MongoClient(mongoHost, mongoHostPort);
+        return new MongoClient(serverAddress(), mongoOptions());
     }
 
     @Override
@@ -41,5 +43,16 @@ public class MongoDBConfiguration extends AbstractMongoConfiguration {
                 new LocalDateTimeToDateConverter(),
                 new DateToLocalDateTimeConverter()
         ));
+    }
+
+    private ServerAddress serverAddress() {
+        return new ServerAddress(mongoHost, mongoHostPort);
+    }
+
+    private MongoClientOptions mongoOptions() {
+        return MongoClientOptions.builder()
+                .connectTimeout(1000)
+                .socketTimeout(1000)
+                .build();
     }
 }
