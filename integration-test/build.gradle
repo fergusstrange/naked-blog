@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':application')
+    testCompile project(':application')
 
     testCompile 'org.springframework:spring-test:4.1.6.RELEASE'
     testCompile 'junit:junit:4.11'
