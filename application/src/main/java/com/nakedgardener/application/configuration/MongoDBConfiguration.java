@@ -51,8 +51,9 @@ public class MongoDBConfiguration extends AbstractMongoConfiguration {
 
     private MongoClientOptions mongoOptions() {
         return MongoClientOptions.builder()
-                .connectTimeout(1000)
-                .socketTimeout(1000)
+                .maxWaitTime(5000)
+                .connectTimeout(5000)
+                .serverSelectionTimeout(5000)
                 .build();
     }
 }
