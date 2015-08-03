@@ -20,7 +20,7 @@ import static org.mockito.Matchers.anyString;
 @ActiveProfiles("stubbed")
 @RunWith(PactRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
-@PactFile("url:http://lianli:8080/pacts/provider/naked-blog/consumer/naked-gardener/latest")
+@PactFile("url:http://lianli:5555/pacts/provider/naked-blog/consumer/naked-gardener/latest")
 public class CDCTestRunner {
 
     @Autowired
