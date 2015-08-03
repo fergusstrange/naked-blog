@@ -8,6 +8,7 @@ import com.nakedgardener.application.configuration.converters.DateToLocalDateTim
 import com.nakedgardener.application.configuration.converters.LocalDateTimeToDateConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -15,6 +16,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import static java.util.Arrays.asList;
 
 @Configuration
+@Profile("!stubbed")
 @EnableMongoRepositories(basePackages = "com.nakedgardener")
 public class MongoDBConfiguration extends AbstractMongoConfiguration {
 
