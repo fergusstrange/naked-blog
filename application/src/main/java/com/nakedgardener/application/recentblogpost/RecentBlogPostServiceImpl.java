@@ -5,7 +5,6 @@ import com.nakedgardener.application.domain.BlogPost;
 import com.nakedgardener.application.domain.BlogPosts;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.ResponseEntity.ok;
 
 @Component
-@Profile("!stubbed")
 public class RecentBlogPostServiceImpl implements RecentBlogPostService {
 
     private final BlogPostRepository blogPostRepository;
