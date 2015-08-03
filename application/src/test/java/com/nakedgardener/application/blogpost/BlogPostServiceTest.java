@@ -26,7 +26,7 @@ public class BlogPostServiceTest {
     private Logger logger;
 
     @InjectMocks
-    private BlogPostService blogPostService;
+    private BlogPostServiceImpl blogPostService;
 
     @Test
     public void shouldReturnValidResponseEntityWhenExistsInDatabase() throws Exception {
