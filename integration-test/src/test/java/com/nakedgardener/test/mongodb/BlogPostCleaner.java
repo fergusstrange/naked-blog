@@ -11,21 +11,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class MongoDBTestCleaner extends AbstractMongoEventListener<BlogPost> {
+public class BlogPostCleaner extends AbstractMongoEventListener<BlogPost> {
 
-    private final Boolean mutex = false;
     private final ThreadLocal<Set<BlogPost>> blogPostThreadLocal = new ThreadLocal<>();
     private final BlogPostRepository blogPostRepository;
 
     @Autowired
-    public MongoDBTestCleaner(BlogPostRepository blogPostRepository) {
+    public BlogPostCleaner(BlogPostRepository blogPostRepository) {
         this.blogPostRepository = blogPostRepository;
         this.blogPostThreadLocal.set(new HashSet<>());
     }
 
     @Override
     public void onAfterSave(BlogPost source, DBObject dbo) {
-        synchronized (mutex) {
+        synchronized (this) {
             blogPostThreadLocal.get().add(source);
         }
         super.onAfterSave(source, dbo);

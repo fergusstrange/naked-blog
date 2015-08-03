@@ -27,8 +27,8 @@ public class MongoDBTestExecutionListener extends AbstractTestExecutionListener 
 
     @Override
     public void afterTestMethod(TestContext testContext) throws Exception {
-        MongoDBTestCleaner mongoDBTestCleaner = testContext.getApplicationContext().getBean(MongoDBTestCleaner.class);
-        mongoDBTestCleaner.cleanUpSavedEntities();
+        BlogPostCleaner blogPostCleaner = testContext.getApplicationContext().getBean(BlogPostCleaner.class);
+        blogPostCleaner.cleanUpSavedEntities();
     }
 
     private int mongoPort() {
