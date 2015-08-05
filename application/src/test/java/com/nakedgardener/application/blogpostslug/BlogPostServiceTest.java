@@ -1,6 +1,7 @@
-package com.nakedgardener.application.blogpost;
+package com.nakedgardener.application.blogpostslug;
 
 import com.nakedgardener.application.domain.BlogPost;
+import com.nakedgardener.application.repository.BlogPostRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,9 +13,7 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BlogPostServiceTest {
@@ -30,7 +29,7 @@ public class BlogPostServiceTest {
 
     @Test
     public void shouldReturnValidResponseEntityWhenExistsInDatabase() throws Exception {
-        given(blogPostRepository.findByBlogPostSlug("any-slug")).willReturn(new BlogPost());
+        given(blogPostRepository.findByBlogPostSlug("any-slug")).willReturn(BlogPost.builder().blogPostSlug("da-da-s-da").build());
 
         ResponseEntity<BlogPost> blogPostSlug = blogPostService.findByBlogPostSlug("any-slug");
 

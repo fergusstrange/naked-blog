@@ -1,6 +1,7 @@
-package com.nakedgardener.application.blogpost;
+package com.nakedgardener.application.blogpostslug;
 
 import com.nakedgardener.application.domain.BlogPost;
+import com.nakedgardener.application.repository.BlogPostRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,5 @@ public class BlogPostServiceImpl implements BlogPostService {
             logger.error("Exception has been thrown by BlogPostService", e);
             return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @Override
-    public BlogPost save(BlogPost blogPost) {
-        return blogPostRepository.save(blogPost);
     }
 }

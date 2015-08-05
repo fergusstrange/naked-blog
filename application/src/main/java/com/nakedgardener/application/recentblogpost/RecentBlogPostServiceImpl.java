@@ -1,6 +1,6 @@
 package com.nakedgardener.application.recentblogpost;
 
-import com.nakedgardener.application.blogpost.BlogPostRepository;
+import com.nakedgardener.application.repository.BlogPostRepository;
 import com.nakedgardener.application.domain.BlogPost;
 import com.nakedgardener.application.domain.BlogPosts;
 import org.slf4j.Logger;

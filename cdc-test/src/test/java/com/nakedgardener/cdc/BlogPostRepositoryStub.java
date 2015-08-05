@@ -1,6 +1,6 @@
 package com.nakedgardener.cdc;
 
-import com.nakedgardener.application.blogpost.BlogPostRepository;
+import com.nakedgardener.application.repository.BlogPostRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

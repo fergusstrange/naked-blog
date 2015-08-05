@@ -1,4 +1,4 @@
-package com.nakedgardener.application.blogpost;
+package com.nakedgardener.application.repository;
 
 import com.nakedgardener.application.domain.BlogPost;
 import org.springframework.data.domain.Pageable;

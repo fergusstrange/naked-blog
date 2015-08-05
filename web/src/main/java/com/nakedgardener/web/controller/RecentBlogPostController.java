@@ -1,4 +1,4 @@
-package com.nakedgardener.web.recentblogpost;
+package com.nakedgardener.web.controller;
 
 import com.nakedgardener.application.domain.BlogPosts;
 import com.nakedgardener.application.recentblogpost.RecentBlogPostService;

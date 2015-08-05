@@ -1,4 +1,4 @@
-package com.nakedgardener.application.blogpost;
+package com.nakedgardener.application.repository;
 
 import com.nakedgardener.application.configuration.IntegrationTestConfiguration;
 import com.nakedgardener.application.configuration.MongoIntegrationTest;
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.nakedgardener.application.domain.BlogPostBuilder.blogPostBuilder;
 import static java.time.LocalDateTime.now;
 import static java.time.LocalDateTime.of;
 import static java.util.Arrays.asList;
@@ -52,7 +51,7 @@ public class BlogPostRepositoryTest {
 
     @Test
     public void shouldNotRetrievePostsAfterNow() throws Exception {
-        BlogPost inTheFuture = blogPostBuilder()
+        BlogPost inTheFuture = BlogPost.builder()
                 .title("in the future")
                 .postDate(now().plusDays(10))
                 .build();
@@ -70,11 +69,11 @@ public class BlogPostRepositoryTest {
     @Test
     public void shouldRetrieveRecentBlogPostsOrderedNewestToOldest() throws Exception {
         blogPostRepository.save(asList(
-                blogPostBuilder().postDate(of(2014, 1, 1, 0, 0)).build(),
-                blogPostBuilder().postDate(of(2014, 1, 2, 0, 0)).build(),
-                blogPostBuilder().postDate(of(2014, 1, 7, 0, 0)).build(),
-                blogPostBuilder().postDate(of(2014, 1, 5, 0, 0)).build(),
-                blogPostBuilder().postDate(of(2014, 1, 4, 0, 0)).build()
+                BlogPost.builder().postDate(of(2014, 1, 1, 0, 0)).build(),
+                BlogPost.builder().postDate(of(2014, 1, 2, 0, 0)).build(),
+                BlogPost.builder().postDate(of(2014, 1, 7, 0, 0)).build(),
+                BlogPost.builder().postDate(of(2014, 1, 5, 0, 0)).build(),
+                BlogPost.builder().postDate(of(2014, 1, 4, 0, 0)).build()
         ));
 
         List<BlogPost> blogPosts = blogPostRepository.findByPostDateBefore(now(), new PageRequest(0, 5, DESC, "postDate"));
@@ -97,7 +96,7 @@ public class BlogPostRepositoryTest {
     }
 
     private BlogPost blogPost(String id, String blogPostSlug) {
-        return blogPostBuilder()
+        return BlogPost.builder()
                 .id(id)
                 .title("title")
                 .blogPostSlug(blogPostSlug)

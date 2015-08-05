@@ -1,7 +1,7 @@
 package com.nakedgardener.test.mongodb;
 
 import com.mongodb.DBObject;
-import com.nakedgardener.application.blogpost.BlogPostRepository;
+import com.nakedgardener.application.repository.BlogPostRepository;
 import com.nakedgardener.application.domain.BlogPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;
