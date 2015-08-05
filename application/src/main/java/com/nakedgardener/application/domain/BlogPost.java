@@ -16,4 +16,8 @@ public class BlogPost {
     private String blogPostSlug;
     private String title;
     private String post;
+
+    public static BlogPost emptyBlogPost() {
+        return builder().build();
+    }
 }

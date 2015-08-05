@@ -10,13 +10,14 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.springframework.http.ResponseEntity;
 
+import static com.nakedgardener.application.domain.BlogPost.emptyBlogPost;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.http.HttpStatus.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BlogPostServiceTest {
+public class BlogPostServiceImplTest {
 
     @Mock
     private BlogPostRepository blogPostRepository;
@@ -41,6 +42,7 @@ public class BlogPostServiceTest {
         ResponseEntity<BlogPost> blogPostSlug = blogPostService.findByBlogPostSlug("any-slug");
 
         assertEquals(NOT_FOUND, blogPostSlug.getStatusCode());
+        assertEquals(emptyBlogPost(), blogPostSlug.getBody());
     }
 
     @Test
@@ -50,6 +52,7 @@ public class BlogPostServiceTest {
         ResponseEntity<BlogPost> blogPostSlug = blogPostService.findByBlogPostSlug("any-slug");
 
         assertEquals(INTERNAL_SERVER_ERROR, blogPostSlug.getStatusCode());
+        assertEquals(emptyBlogPost(), blogPostSlug.getBody());
     }
 
     @Test

@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import static com.nakedgardener.application.domain.BlogPost.emptyBlogPost;
 import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.ResponseEntity.ok;
+import static org.springframework.http.ResponseEntity.status;
 
 @Component
 public class BlogPostServiceImpl implements BlogPostService {
@@ -26,12 +29,12 @@ public class BlogPostServiceImpl implements BlogPostService {
         try {
             BlogPost blogPost = blogPostRepository.findByBlogPostSlug(blogPostSlug);
             return blogPost != null ?
-                    new ResponseEntity<>(blogPost, OK) :
-                    new ResponseEntity<>(NOT_FOUND);
+                    ok(blogPost) :
+                    status(NOT_FOUND).body(emptyBlogPost());
         }
         catch (Exception e) {
             logger.error("Exception has been thrown by BlogPostService", e);
-            return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
+            return status(INTERNAL_SERVER_ERROR).body(emptyBlogPost());
         }
     }
 }
