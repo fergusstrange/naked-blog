@@ -14,12 +14,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @RestController
-public class BlogPostController {
+public class BlogPostSlugController {
 
     private final BlogPostService blogPostService;
 
     @Autowired
-    public BlogPostController(BlogPostService blogPostService) {
+    public BlogPostSlugController(BlogPostService blogPostService) {
         this.blogPostService = blogPostService;
     }
 
