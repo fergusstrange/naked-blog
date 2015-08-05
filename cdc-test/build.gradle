@@ -1,4 +1,62 @@
+import org.apache.http.client.fluent.Request
+
+import java.util.concurrent.Callable
+
+import static java.lang.Thread.sleep
+import static java.util.concurrent.Executors.newSingleThreadExecutor
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.apache.httpcomponents:fluent-hc:4.5")
+    }
+}
+
+plugins {
+    id "au.com.dius.pact" version "2.2.10"
+}
+
 dependencies {
     testCompile project(':web')
-    testCompile 'com.reagroup:pact-jvm-provider-spring-mvc_2.11:0.4.0'
+    testCompile 'org.mockito:mockito-all:1.10.19'
+}
+
+task startAppProcess(type: JavaExec, dependsOn: 'testClasses') {
+    classpath = sourceSets.test.runtimeClasspath
+    main = 'com.nakedgardener.web.Application'
+    systemProperty 'server.port', '3456'
+    systemProperty 'spring.profiles.active', 'stubbed'
+}
+
+task startApp << {
+    newSingleThreadExecutor().submit({startAppProcess.execute()} as Callable)
+    def timeTaken = 0
+    while(timeTaken < 60) {
+        try {
+            if (Request.Get("http://localhost:3456/").execute().returnResponse().getStatusLine().getStatusCode() == 200) return;
+        }
+        catch(Exception e){}
+        timeTaken++
+        sleep(500)
+    }
+    throw new GradleException("Failed to start app in 30 seconds.")
+}
+
+pact {
+    serviceProviders {
+        nakedBlog {
+            protocol = 'http'
+            host = 'localhost'
+            port = 3456
+            path = '/'
+
+            startProviderTask = startApp
+
+            hasPactWith('naked-gardener') {
+                pactFile = url('http://lianli:5555/pact/provider/naked-blog/consumer/naked-gardener/latest/json')
+            }
+        }
+    }
 }
