@@ -46,7 +46,11 @@ public class BlogPostRepositoryStub {
     public void shouldReturnBlogPost() {
         given(blogPostRepository.findByBlogPostSlug("la-la-la")).willReturn(
                 BlogPost.builder()
+                        .id("dajksbd19dbn1ons19us91ns1u9ni1s1nsu91")
                         .blogPostSlug("la-la-la")
+                        .title("A blog post title")
+                        .postDate(LocalDateTime.now())
+                        .post("Some nonsensical crap.")
                         .build()
         );
     }
