@@ -55,7 +55,11 @@ pact {
             startProviderTask = startApp
 
             hasPactWith('naked-gardener') {
-                pactFile = url('http://localhost:5555/pacts/provider/naked-blog/consumer/naked-gardener/latest')
+                pactFile = url('http://52.30.133.98:5555/pacts/provider/naked-blog/consumer/naked-gardener/latest')
+            }
+
+            hasPactWith('naked-blog-ui') {
+                pactFile = url('http://52.30.133.98:5555/pacts/provider/naked-blog/consumer/naked-blog-ui/latest')
             }
         }
     }
